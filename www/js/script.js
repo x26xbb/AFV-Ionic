@@ -12,6 +12,22 @@ AFV.afvrs = AFV.server + 'afvServices/afvrs';
 AFV.init = (function() {
     //In case something needed! 
 });
+
+
+AFV.createPresupuesto = (function(data) {
+    if (data) {
+        var url = AFV.afvrs + '/' + AFV.user + '/' + AFV.token + '/presupuestos/add';
+        var response = AFV.sendDataSync(url, data, 'POST');
+        console.log('createPresupuesto ', response);
+        if (response) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+});
+
+
 AFV.createAccount = (function(data) {
     if (data.password === data.passwordConfirm) {
         var url = AFV.srrs + '/create_account';

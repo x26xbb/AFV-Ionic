@@ -82,6 +82,19 @@ angular.module('starter.controllers', [])
             $scope.openModal = function() {
                 $scope.modal.show();
             };
+            
+             $scope.createPresupuesto = function() {
+                console.log("createPresupuesto", $scope.presupuestoData);
+                var response = AFV.createPresupuesto($scope.presupuestoData);
+                if(response){
+                    $scope.closeModal();
+                    $state.go($state.current, {}, {reload: true});
+                }else{
+                    //Show error
+                }
+             };
+            
+            
 
         })
 
