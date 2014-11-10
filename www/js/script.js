@@ -12,6 +12,19 @@ AFV.afvrs = AFV.server + 'afvServices/afvrs';
 AFV.init = (function() {
     //In case something needed! 
 });
+AFV.createAccount = (function(data) {
+    if (data.password === data.passwordConfirm) {
+        var url = AFV.srrs + '/create_account';
+        var response = AFV.sendDataSync(url, data, 'POST');
+        console.log('createAccount ', response);
+        if (response) {
+            return {"email": response.user.correo, "password": data.password};
+        } else {
+            return false;
+        }
+    }
+});
+
 AFV.login = (function(data) {
     var url = AFV.srrs + '/login';
     var response = AFV.sendDataSync(url, data, 'POST');

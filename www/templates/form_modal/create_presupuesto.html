@@ -1,0 +1,30 @@
+<ion-view title="Crear Presupuesto">
+    <ion-header-bar>
+        <h1 class="title">Crear Presupuesto</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeModal()">Close</button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="">
+        <form ng-submit="createPresupuesto()">
+            <div class="list">                
+                <label class="item item-input">
+                    <span class="input-label">Nombre</span>
+                    <input type="text" ng-model="presupuestoData.nombre">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Comentario</span>
+                    <input type="text" ng-model="presupuestoData.comentario">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Ingreso</span>
+                    <input type="text" ng-model="presupuestoData.ingreso">
+                </label>
+                <label class="item">
+                    <button class="button button-block button-positive" type="submit">Crear Presupuesto</button>
+                </label>
+            </div>
+        </form>
+    </ion-content>
+</ion-view> 
+

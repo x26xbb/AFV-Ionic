@@ -1,7 +1,8 @@
 angular.module('starter.controllers', [])
 
-        .controller('AppCtrlLogin', function($scope, $ionicSideMenuDelegate, $state) {
+        .controller('AppCtrlLogin', function($scope, $ionicSideMenuDelegate, $state, $ionicModal) {
             $scope.loginData = {};
+            $scope.accountData = {};
             $ionicSideMenuDelegate.canDragContent(false);
 
             $scope.doLogin = function() {
@@ -12,6 +13,39 @@ angular.module('starter.controllers', [])
                     console.log("show error!!");
                 }
             };
+
+            // Create the login modal that we will use later
+            $ionicModal.fromTemplateUrl('templates/form_modal/create_account.html', {
+                scope: $scope
+            }).then(function(modal) {
+                $scope.modal = modal;
+            });
+
+            // Triggered in the Create Account to close it
+            $scope.closeModal = function() {
+                $scope.modal.hide();
+                $scope.accountData = {};//Clear form
+            };
+
+            // Open the Create Account modal
+            $scope.openModal = function() {
+                $scope.modal.show();
+            };
+
+            $scope.createAccount = function() {
+                console.log("createAccount", $scope.accountData);
+                var response = AFV.createAccount($scope.accountData);
+                if (response) {
+                    console.log("createAccount-Login", response);
+                    $scope.loginData = response;
+                    $scope.modal.hide();
+                    $scope.accountData = {};//Clear form
+                    $scope.doLogin();
+                } else {
+                    //TODO: Show error!!
+                }
+            };
+
         })
 
         .controller('AppCtrl', function($scope) {
@@ -26,9 +60,29 @@ angular.module('starter.controllers', [])
             };
         })
 
-        .controller('PresupuestosCtrl', function($scope, $state) {
+        .controller('PresupuestosCtrl', function($scope, $state, $ionicModal) {
+            $scope.presupuestoData = {};
             AFV.checkSession($state);
             $scope.presupuestos = AFV.getPresupuestos();
+            
+            // Create the login modal that we will use later
+            $ionicModal.fromTemplateUrl('templates/form_modal/create_presupuesto.html', {
+                scope: $scope
+            }).then(function(modal) {
+                $scope.modal = modal;
+            });
+
+            // Triggered in the Create Presupuesto to close it
+            $scope.closeModal = function() {
+                $scope.modal.hide();
+                $scope.presupuestoData = {};//Clear form
+            };
+
+            // Open the Create Account modal
+            $scope.openModal = function() {
+                $scope.modal.show();
+            };
+
         })
 
         .controller('PresupuestoCtrl', function($scope, $stateParams, $ionicNavBarDelegate, $state) {

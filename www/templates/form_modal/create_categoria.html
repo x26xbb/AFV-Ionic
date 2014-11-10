@@ -1,0 +1,20 @@
+<ion-view title="Crear Categoria">
+    <ion-content class="">
+        <form ng-submit="createCategoria()">
+            <div class="list">
+                <label class="item item-input">
+                    <span class="input-label">Nombre</span>
+                    <input type="text" ng-model="categoriaData.nombre">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Porcentaje</span>
+                    <input type="text" ng-model="categoriaData.porcentaje">
+                </label>
+                <label class="item">
+                    <button class="button button-block button-positive" type="submit">Crear Categoria</button>
+                </label>
+            </div>
+        </form>
+    </ion-content>
+</ion-view> 
+
