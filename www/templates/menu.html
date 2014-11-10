@@ -1,0 +1,37 @@
+<ion-side-menus>
+    <ion-pane ion-side-menu-content>
+        <ion-nav-bar class="bar-positive nav-title-slide-ios7">
+            <ion-nav-buttons side="right">        
+                <button class="button icon ion-ios7-person"></button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+    </ion-pane>
+    <ion-side-menu side="left">
+        <header class="bar bar-header bar-positive">
+            <button class="button icon ion-gear-a"></button>
+        </header>
+        <ion-content class="has-header">
+            <ion-list>
+                <ion-item nav-clear menu-close href="#/app/home">
+                    Home
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/presupuestos">
+                    Presupuesto
+                </ion-item>                
+                <ion-item nav-clear menu-close href="#/app/playlists">
+                    Cuentas
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/playlists">
+                    Prestamos
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/playlists">
+                    *Asesoramiento
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/">
+                    Log out
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>
