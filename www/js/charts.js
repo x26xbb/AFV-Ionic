@@ -25,11 +25,17 @@ AFV.chartInit = (function($scope, presupuesto) {
     $scope.$on('$viewContentLoaded', function() {
         if (AFV.isPresupuestoReady(presupuesto)) {
             AFV.showPresupuesto(presupuesto);
+            AFV.showPresupuestoBarras(presupuesto);
         } else {
-            $("#presupuestoChart").addClass("hide");
+            $("#chartsDiv").addClass("hide");
             $("#prespuestoCard").removeClass("hide");
         }
     });
+});
+
+AFV.showPresupuestoBarras = (function(presupuesto) {
+    var canvas = $("#presupuestoChartBarras").get(0);
+    var ctx = canvas.getContext("2d");
 });
 
 AFV.showPresupuesto = (function(presupuesto) {

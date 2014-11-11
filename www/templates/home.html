@@ -5,7 +5,11 @@
     <ion-content class="has-header">
         <ion-slide-box on-slide-changed="slideHasChanged($index)">
             <ion-slide>
-                <canvas id="presupuestoChart" class="chart"></canvas>  
+                <div id="chartsDiv">
+                    <canvas id="presupuestoChart" class="chart"></canvas>  
+                    <canvas id="presupuestoChartBarras" class="chart"></canvas>  
+                </div>
+                
                 <div  id="prespuestoCard" class="hide">
                     <div class="card cardCenterText">
                         <div class="item item-text-wrap">
