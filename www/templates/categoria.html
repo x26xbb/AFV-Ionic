@@ -10,9 +10,8 @@
 
             <h2>Gastos</h2>
 
-            <ion-list>
-                <ion-item
-                    class="item item-button-right"
+            <div class="list">
+                <a  class="item item-button-right" 
                     ng-repeat="gasto in categoria.gastos" 
                     href="#/app/presupuestos/{{presupuesto.presupuestoId}}/categorias/{{categoria.categoriaId}}/gastos/{{gasto.gastoId}}">
                     {{gasto.nombre}}
@@ -20,11 +19,12 @@
                     <span class="item-note">
                         {{gasto.monto}}
                     </span>
-                    <button class="button bar-assertive">
-                        <i class="icon ion-ios7-trash"></i>
+
+                    <button class="button button-assertive small-button small-icon ion-ios7-trash" ng-click="">
+
                     </button>
-                </ion-item>
-            </ion-list>
+                </a>
+            </div>
 
             <button class="button button-block button-positive icon ion-android-add" ng-click="openModal()">
 

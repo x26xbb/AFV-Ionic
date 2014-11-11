@@ -26,14 +26,17 @@
 
             <h2>Categorias</h2>
 
-            <ion-list>
-                <ion-item ng-repeat="categoria in presupuesto.categorias" href="#/app/presupuestos/{{presupuesto.presupuestoId}}/categorias/{{categoria.categoriaId}}">
+            <div class="list">
+                <a  class="item item-button-right" 
+                    ng-repeat="categoria in presupuesto.categorias"
+                    href="#/app/presupuestos/{{presupuesto.presupuestoId}}/categorias/{{categoria.categoriaId}}">
                     {{categoria.nombre}}
-                    <button class="button bar-assertive">
-                        <i class="icon ion-ios7-trash"></i>
+
+                    <button class="button button-assertive small-button small-icon ion-ios7-trash" ng-click="">
+
                     </button>
-                </ion-item>
-            </ion-list>
+                </a>
+            </div>
 
             <button class="button button-block button-positive icon ion-android-add" ng-click="openModal()">
 
