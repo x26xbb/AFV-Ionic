@@ -12,10 +12,17 @@ AFV.sumaGastos = (function (presupuesto) {
             montoTotal += gasto.monto;
         }
         montoTotal = Math.round((montoTotal / ingreso) * 100);
-        dineroLibre = dineroLibre - montoTotal;
+        // dineroLibre = dineroLibre - montoTotal;
+        // -------- esta parte se modificó, simplemente verifica el momento que el usuario no tiene dineroLibre
+        if (dineroLibre >= montoTotal) {
+            dineroLibre = dineroLibre - montoTotal;
+        }else{
+            dineroLibre = 0;
+        }
+        //-----------------------------------------
         data.push({value: montoTotal, label: categoria.nombre, color: color.get(true), highlight: color.get(true)});
     }
-    dineroLibre = Math.round((dineroLibre / ingreso) * 100);
+    dineroLibre = Math.round((dineroLibre / ingreso) * 100);//???
     data.push({value: dineroLibre, label: "Dinero Libre", color: color.get(true), highlight: color.get(true)});
     return data;
 });
@@ -39,7 +46,7 @@ AFV.datosBarras = (function (presupuesto) {
         montoTotal = Math.round((montoTotal / ingreso) * 100);
         porcentajeActualCategoria.push(montoTotal);
     }
- 
+
     var data = {
         labels: labelsCategories,
         datasets: [
@@ -61,7 +68,7 @@ AFV.datosBarras = (function (presupuesto) {
             }
         ]
     };
-    
+
     return data;
 
 });
