@@ -13,6 +13,18 @@ AFV.init = (function() {
     //In case something needed! 
 });
 
+AFV.deleteGasto = (function(prespuestoId, categoriaId, gastoId) {
+    var data = {};
+    var url = AFV.afvrs + '/' + AFV.user + '/' + AFV.token + '/presupuestos/' + prespuestoId + '/categorias/' + categoriaId + '/gastos/delete/' + gastoId;
+    var response = AFV.sendDataSync(url, data, 'POST');
+    console.log('deleteGasto ', response);
+    if (response) {
+        return true;
+    } else {
+        return false;
+    }
+
+});
 
 AFV.createGasto = (function(data, prespuestoId, categoriaId) {
     if (data) {
@@ -27,6 +39,19 @@ AFV.createGasto = (function(data, prespuestoId, categoriaId) {
     }
 });
 
+AFV.deleteCategoria = (function(prespuestoId, categoriaId) {
+    var data = {};
+    var url = AFV.afvrs + '/' + AFV.user + '/' + AFV.token + '/presupuestos/' + prespuestoId + '/categorias/delete/' + categoriaId;
+    var response = AFV.sendDataSync(url, data, 'POST');
+    console.log('deleteCategoria ', response);
+    if (response) {
+        return true;
+    } else {
+        return false;
+    }
+
+});
+
 AFV.createCategoria = (function(data, prespuestoId) {
     if (data) {
         var url = AFV.afvrs + '/' + AFV.user + '/' + AFV.token + '/presupuestos/' + prespuestoId + '/categorias/add';
@@ -38,6 +63,19 @@ AFV.createCategoria = (function(data, prespuestoId) {
             return false;
         }
     }
+});
+
+AFV.deletePresupuesto = (function(prespuestoId) {
+    var data = {};
+    var url = AFV.afvrs + '/' + AFV.user + '/' + AFV.token + '/presupuestos/delete/' + prespuestoId;
+    var response = AFV.sendDataSync(url, data, 'POST');
+    console.log('deletePresupuesto', response);
+    if (response) {
+        return true;
+    } else {
+        return false;
+    }
+
 });
 
 AFV.createPresupuesto = (function(data) {

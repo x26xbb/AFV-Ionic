@@ -47,7 +47,7 @@ angular.module('starter.controllers', [])
                 } else {
                     $ionicPopup.alert({
                         title: 'Error!',
-                        template: 'Ocurrio un error creado su cuenta! Vuelva a intentar...'
+                        template: 'Ocurrio un error creando su cuenta! Vuelva a intentar...'
                     });
                 }
             };
@@ -71,6 +71,13 @@ angular.module('starter.controllers', [])
             $scope.presupuestoData = {};
             AFV.checkSession($state);
             $scope.presupuestos = AFV.getPresupuestos();
+
+            $scope.$on('$viewContentLoaded', function() {
+                if (!$scope.presupuestos || $scope.presupuestos.length === 0) {
+                    $("#presupuestos").addClass("hide");
+                    $("#noPresupuestosCard").removeClass("hide");
+                }
+            });
 
             // Create the login modal that we will use later
             $ionicModal.fromTemplateUrl('templates/form_modal/create_presupuesto.html', {
@@ -99,9 +106,30 @@ angular.module('starter.controllers', [])
                 } else {
                     $ionicPopup.alert({
                         title: 'Error!',
-                        template: 'Ocurrio un error creado este presupuesto! Vuelva a intentar...'
+                        template: 'Ocurrio un error creando este presupuesto! Vuelva a intentar...'
                     });
                 }
+            };
+
+            $scope.deletePresupuesto = function($event, presupuestoNombre, presupuestoId) {
+                $event.preventDefault();
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Borrar Presupuesto',
+                    template: 'Está seguro que desea borrar el presupuesto ' + presupuestoNombre + '?'
+                });
+                confirmPopup.then(function(res) {
+                    if (res) {
+                        var response = AFV.deletePresupuesto(presupuestoId);
+                        if (response) {
+                            $state.go($state.current, {}, {reload: true});
+                        } else {
+                            $ionicPopup.alert({
+                                title: 'Error!',
+                                template: 'Ocurrio un error al eliminar este presupuesto! Vuelva a intentar...'
+                            });
+                        }
+                    }
+                });
             };
 
 
@@ -114,6 +142,14 @@ angular.module('starter.controllers', [])
             $scope.presupuesto = AFV.getPresupuesto($stateParams.presupuestoId);
             AFV.chartInit($scope, $scope.presupuesto);
             console.log($scope.presupuesto);
+
+            $scope.$on('$viewContentLoaded', function() {
+                if (!$scope.presupuesto.categorias || $scope.presupuesto.categorias.length === 0) {
+                    $("#categorias").addClass("hide");
+                    $("#noCategoriasCard").removeClass("hide");
+                }
+            });
+
             $scope.goBack = function() {
                 $ionicNavBarDelegate.back();
             };
@@ -135,6 +171,11 @@ angular.module('starter.controllers', [])
             $scope.openModal = function() {
                 $scope.modal.show();
             };
+
+            $scope.deleteCategoria = function() {
+
+            };
+
             $scope.createCategoria = function() {
                 console.log("createCategoria", $scope.categoriaData);
                 var response = AFV.createCategoria($scope.categoriaData, $stateParams.presupuestoId);
@@ -144,9 +185,30 @@ angular.module('starter.controllers', [])
                 } else {
                     $ionicPopup.alert({
                         title: 'Error!',
-                        template: 'Ocurrio un error creado esta categoria! Vuelva a intentar...'
+                        template: 'Ocurrio un error creando esta categoria! Vuelva a intentar...'
                     });
                 }
+            };
+
+            $scope.deleteCategoria = function($event, categoriaNombre, categoriaId) {
+                $event.preventDefault();
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Borrar Categoria',
+                    template: 'Está seguro que desea borrar la categoria ' + categoriaNombre + '?'
+                });
+                confirmPopup.then(function(res) {
+                    if (res) {
+                        var response = AFV.deleteCategoria($stateParams.presupuestoId, categoriaId);
+                        if (response) {
+                            $state.go($state.current, {}, {reload: true});
+                        } else {
+                            $ionicPopup.alert({
+                                title: 'Error!',
+                                template: 'Ocurrio un error al eliminar esta categoria! Vuelva a intentar...'
+                            });
+                        }
+                    }
+                });
             };
 
         })
@@ -155,6 +217,13 @@ angular.module('starter.controllers', [])
             AFV.checkSession($state);
             $scope.gastoData = {};
             $scope.categoria = AFV.getCategoria($stateParams.presupuestoId, $stateParams.categoriaId);
+
+            $scope.$on('$viewContentLoaded', function() {
+                if (!$scope.categoria.gastos || $scope.categoria.gastos.length === 0) {
+                    $("#gastos").addClass("hide");
+                    $("#noGastosCard").removeClass("hide");
+                }
+            });
 
             $scope.goBack = function() {
                 $ionicNavBarDelegate.back();
@@ -178,6 +247,27 @@ angular.module('starter.controllers', [])
                 $scope.modal.show();
             };
 
+            $scope.deleteGasto = function($event, gastoNombre, gastoId) {
+                $event.preventDefault();
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Borrar Gasto',
+                    template: 'Está seguro que desea borrar el gasto ' + gastoNombre + '?'
+                });
+                confirmPopup.then(function(res) {
+                    if (res) {
+                        var response = AFV.deleteGasto($stateParams.presupuestoId, $stateParams.categoriaId, gastoId);
+                        if (response) {
+                            $state.go($state.current, {}, {reload: true});
+                        } else {
+                            $ionicPopup.alert({
+                                title: 'Error!',
+                                template: 'Ocurrio un error al eliminar este gasto! Vuelva a intentar...'
+                            });
+                        }
+                    }
+                });
+            };
+
             $scope.createGasto = function() {
                 console.log("createGasto", $scope.gastoData);
                 var response = AFV.createGasto($scope.gastoData, $stateParams.presupuestoId, $stateParams.categoriaId);
@@ -187,7 +277,7 @@ angular.module('starter.controllers', [])
                 } else {
                     $ionicPopup.alert({
                         title: 'Error!',
-                        template: 'Ocurrio un error creado este gasto! Vuelva a intentar...'
+                        template: 'Ocurrio un error creando este gasto! Vuelva a intentar...'
                     });
                 }
             };
