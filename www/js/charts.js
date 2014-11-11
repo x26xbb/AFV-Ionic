@@ -1,4 +1,6 @@
-AFV.sumaGastos = (function (presupuesto) {
+AFV.timeOut = 1200;
+
+AFV.sumaGastos = (function(presupuesto) {
     console.log("sumaGastos", presupuesto);
     var data = [];
     var color = new RColor;
@@ -11,8 +13,8 @@ AFV.sumaGastos = (function (presupuesto) {
             var gasto = categoria.gastos[indexGasto];
             montoTotal += gasto.monto;
         }
-        montoTotal = Math.round((montoTotal / ingreso) * 100);
         dineroLibre = dineroLibre - montoTotal;
+        montoTotal = Math.round((montoTotal / ingreso) * 100);
         data.push({value: montoTotal, label: categoria.nombre, color: color.get(true), highlight: color.get(true)});
     }
     dineroLibre = Math.round((dineroLibre / ingreso) * 100);
@@ -20,7 +22,7 @@ AFV.sumaGastos = (function (presupuesto) {
     return data;
 });
 
-AFV.datosBarras = (function (presupuesto) {
+AFV.datosBarras = (function(presupuesto) {
     console.log("Grafico de barras", presupuesto);
     var labelsCategories = [];
     var ingreso = presupuesto.ingreso;
@@ -39,7 +41,7 @@ AFV.datosBarras = (function (presupuesto) {
         montoTotal = Math.round((montoTotal / ingreso) * 100);
         porcentajeActualCategoria.push(montoTotal);
     }
- 
+
     var data = {
         labels: labelsCategories,
         datasets: [
@@ -61,42 +63,51 @@ AFV.datosBarras = (function (presupuesto) {
             }
         ]
     };
-    
+
     return data;
 
 });
 
-AFV.chartInit = (function ($scope, presupuesto) {
-    console.log("chartInit", presupuesto);
-    $scope.$on('$viewContentLoaded', function () {
-        if (AFV.isPresupuestoReady(presupuesto)) {
-            AFV.showPresupuesto(presupuesto);
-            AFV.showPresupuestoBarras(presupuesto);
-        } else {
-            $("#chartsDiv").addClass("hide");
-            $("#prespuestoCard").removeClass("hide");
-        }
-    });
+AFV.chartInitHome = (function() {
+    var presupuestos = AFV.tempPresupuestos;
+    for (var presupuestoIndex in presupuestos) {
+        var presupuesto = presupuestos[presupuestoIndex];
+        console.log("pres", presupuesto);
+        AFV.chartInit(presupuesto);
+    }
 });
 
-AFV.showPresupuestoBarras = (function (presupuesto) {
-    var canvas = $("#presupuestoChartBarras").get(0);
+AFV.chartInit = (function(presupuesto) {
+    console.log("chartInit", presupuesto);
+
+    if (AFV.isPresupuestoReady(presupuesto)) {
+        AFV.showPresupuesto(presupuesto);
+        AFV.showPresupuestoBarras(presupuesto);
+    } else {
+        $("#chartsDiv_" + presupuesto.presupuestoId).addClass("hide");
+        $("#prespuestoCard_" + presupuesto.presupuestoId).removeClass("hide");
+    }
+
+});
+
+AFV.showPresupuestoBarras = (function(presupuesto) {
+    var canvas = $("#presupuestoChartBarras_" + presupuesto.presupuestoId).get(0);
     var ctx = canvas.getContext("2d");
     var PresupuestoChartBarras = new Chart(ctx).Bar(AFV.datosBarras(presupuesto), AFV.charOptionsBar);
 });
 
-AFV.showPresupuesto = (function (presupuesto) {
-    var canvas = $("#presupuestoChart").get(0);
+AFV.showPresupuesto = (function(presupuesto) {
+    var canvas = $("#presupuestoChart_" + presupuesto.presupuestoId).get(0);
     var ctx = canvas.getContext("2d");
     var presupuestoChart = new Chart(ctx).Pie(AFV.sumaGastos(presupuesto), AFV.chartOptions);
-    canvas.onclick = function (evt) {
+    canvas.onclick = function(evt) {
         var activePoints = presupuestoChart.getSegmentsAtEvent(evt);
         console.log("Chart Click", activePoints);
         // => activePoints is an array of segments on the canvas that are at the same position as the click event.
     };
 });
 
-AFV.isPresupuestoReady = (function (presupuesto) {
+AFV.isPresupuestoReady = (function(presupuesto) {
     for (var indexCategoria in presupuesto.categorias) {
         var categoria = presupuesto.categorias[indexCategoria];
         for (var indexGasto in categoria.gastos) {

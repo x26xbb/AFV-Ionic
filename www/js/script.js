@@ -9,6 +9,8 @@ AFV.srrs = AFV.server + 'sharedService/ssrs';
 AFV.afvrs = AFV.server + 'afvServices/afvrs';
 
 
+AFV.tempPresupuestos = {};
+
 AFV.init = (function() {
     //In case something needed! 
 });
@@ -103,6 +105,11 @@ AFV.createAccount = (function(data) {
             return false;
         }
     }
+});
+
+AFV.preLogin = (function() {
+    var url = AFV.afvrs + '/status';
+    return AFV.getData(url);
 });
 
 AFV.login = (function(data) {

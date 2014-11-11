@@ -11,11 +11,23 @@
                 Ingreso: {{presupuesto.ingreso}}
             </div>
         </div>
-        <div id="chartsDiv">
-            <canvas id="presupuestoChart" class="chart"></canvas>  
-            <canvas id="presupuestoChartBarras" class="chart"></canvas>  
+        <div ng-attr-id="{{ 'chartsDiv_' + presupuesto.presupuestoId}}">
+            <div class="list">
+                <div class="item item-divider cardCenterText">
+                    <i class="icon ion-ios7-circle-filled"></i>
+                </div>
+                <div class="item cardCenterText">
+                    <canvas ng-attr-id="{{ 'presupuestoChart_' + presupuesto.presupuestoId}}"  class="char"></canvas>  
+                </div>
+                <div class="item item-divider cardCenterText">
+                    <i class="icon ion-stats-bars"></i>
+                </div>
+                <div class="item cardCenterText" >
+                    <canvas ng-attr-id="{{ 'presupuestoChartBarras_' + presupuesto.presupuestoId}}"  class="chart"></canvas>  
+                </div>
+            </div>  
         </div> 
-        <div  id="prespuestoCard" class="hide">
+        <div  id="prespuestoCard{{presupuesto.id}}" class="hide">
             <div class="card cardCenterText">
                 <div class="item item-text-wrap">
                     <i class="icon ion-settings big-icon"></i>

@@ -1,10 +1,9 @@
 angular.module('starter.controllers', [])
-
         .controller('AppCtrlLogin', function($scope, $ionicSideMenuDelegate, $state, $ionicModal, $ionicPopup) {
             $scope.loginData = {};
             $scope.accountData = {};
+            //AFV.preLogin();
             $ionicSideMenuDelegate.canDragContent(false);
-
             $scope.doLogin = function() {
                 if (AFV.login($scope.loginData)) {
                     $state.go("app.home");
@@ -16,25 +15,21 @@ angular.module('starter.controllers', [])
                     });
                 }
             };
-
             // Create the login modal that we will use later
             $ionicModal.fromTemplateUrl('templates/form_modal/create_account.html', {
                 scope: $scope
             }).then(function(modal) {
                 $scope.modal = modal;
             });
-
             // Triggered in the Create Account to close it
             $scope.closeModal = function() {
                 $scope.modal.hide();
-                $scope.accountData = {};//Clear form
+                $scope.accountData = {}; //Clear form
             };
-
             // Open the Create Account modal
             $scope.openModal = function() {
                 $scope.modal.show();
             };
-
             $scope.createAccount = function() {
                 console.log("createAccount", $scope.accountData);
                 var response = AFV.createAccount($scope.accountData);
@@ -42,7 +37,7 @@ angular.module('starter.controllers', [])
                     console.log("createAccount-Login", response);
                     $scope.loginData = response;
                     $scope.modal.hide();
-                    $scope.accountData = {};//Clear form
+                    $scope.accountData = {}; //Clear form
                     $scope.doLogin();
                 } else {
                     $ionicPopup.alert({
@@ -51,52 +46,55 @@ angular.module('starter.controllers', [])
                     });
                 }
             };
-
         })
 
         .controller('AppCtrl', function($scope) {
-        })
 
+        })
         .controller('HomeCtrl', function($scope, $state) {
             AFV.checkSession($state);
             $scope.userData = AFV.getUser();
-            AFV.chartInit($scope, $scope.userData.user.presupuestos[0]);
+            AFV.tempPresupuestos = $scope.userData.user.presupuestos;
+            $(function() {
+                $scope.$on('$viewContentLoaded', function() {
+                    setTimeout(function() {
+                        AFV.chartInitHome();
+                    }, AFV.timeOut);
+                });
+            });
+
             // Called each time the slide changes
             $scope.slideChanged = function(index) {
                 $scope.slideIndex = index;
             };
+
         })
 
         .controller('PresupuestosCtrl', function($scope, $state, $ionicModal, $ionicPopup) {
             $scope.presupuestoData = {};
             AFV.checkSession($state);
             $scope.presupuestos = AFV.getPresupuestos();
-
             $scope.$on('$viewContentLoaded', function() {
                 if (!$scope.presupuestos || $scope.presupuestos.length === 0) {
                     $("#presupuestos").addClass("hide");
                     $("#noPresupuestosCard").removeClass("hide");
                 }
             });
-
             // Create the login modal that we will use later
             $ionicModal.fromTemplateUrl('templates/form_modal/create_presupuesto.html', {
                 scope: $scope
             }).then(function(modal) {
                 $scope.modal = modal;
             });
-
             // Triggered in the Create Presupuesto to close it
             $scope.closeModal = function() {
                 $scope.modal.hide();
-                $scope.presupuestoData = {};//Clear form
+                $scope.presupuestoData = {}; //Clear form
             };
-
             // Open the Create Account modal
             $scope.openModal = function() {
                 $scope.modal.show();
             };
-
             $scope.createPresupuesto = function() {
                 console.log("createPresupuesto", $scope.presupuestoData);
                 var response = AFV.createPresupuesto($scope.presupuestoData);
@@ -110,7 +108,6 @@ angular.module('starter.controllers', [])
                     });
                 }
             };
-
             $scope.deletePresupuesto = function($event, presupuestoNombre, presupuestoId) {
                 $event.preventDefault();
                 var confirmPopup = $ionicPopup.confirm({
@@ -131,49 +128,45 @@ angular.module('starter.controllers', [])
                     }
                 });
             };
-
-
-
         })
 
         .controller('PresupuestoCtrl', function($scope, $stateParams, $ionicNavBarDelegate, $state, $ionicModal, $ionicPopup) {
             AFV.checkSession($state);
             $scope.categoriaData = {};
             $scope.presupuesto = AFV.getPresupuesto($stateParams.presupuestoId);
-            AFV.chartInit($scope, $scope.presupuesto);
-            console.log($scope.presupuesto);
 
+            $(function() {
+                $scope.$on('$viewContentLoaded', function() {
+                    setTimeout(function() {
+                        AFV.chartInit($scope.presupuesto);
+                    }, AFV.timeOut);
+                });
+            });
+
+            console.log($scope.presupuesto);
             $scope.$on('$viewContentLoaded', function() {
                 if (!$scope.presupuesto.categorias || $scope.presupuesto.categorias.length === 0) {
                     $("#categorias").addClass("hide");
                     $("#noCategoriasCard").removeClass("hide");
                 }
             });
-
             $scope.goBack = function() {
                 $ionicNavBarDelegate.back();
             };
-
             // Create the login modal that we will use later
             $ionicModal.fromTemplateUrl('templates/form_modal/create_categoria.html', {
                 scope: $scope
             }).then(function(modal) {
                 $scope.modal = modal;
             });
-
             // Triggered in the Create Account to close it
             $scope.closeModal = function() {
                 $scope.modal.hide();
-                $scope.categoriaData = {};//Clear form
+                $scope.categoriaData = {}; //Clear form
             };
-
             // Open the Create Account modal
             $scope.openModal = function() {
                 $scope.modal.show();
-            };
-
-            $scope.deleteCategoria = function() {
-
             };
 
             $scope.createCategoria = function() {
@@ -189,7 +182,6 @@ angular.module('starter.controllers', [])
                     });
                 }
             };
-
             $scope.deleteCategoria = function($event, categoriaNombre, categoriaId) {
                 $event.preventDefault();
                 var confirmPopup = $ionicPopup.confirm({
@@ -210,43 +202,36 @@ angular.module('starter.controllers', [])
                     }
                 });
             };
-
         })
 
         .controller('CategoriaCtrl', function($scope, $stateParams, $ionicNavBarDelegate, $state, $ionicModal, $ionicPopup) {
             AFV.checkSession($state);
             $scope.gastoData = {};
             $scope.categoria = AFV.getCategoria($stateParams.presupuestoId, $stateParams.categoriaId);
-
             $scope.$on('$viewContentLoaded', function() {
                 if (!$scope.categoria.gastos || $scope.categoria.gastos.length === 0) {
                     $("#gastos").addClass("hide");
                     $("#noGastosCard").removeClass("hide");
                 }
             });
-
             $scope.goBack = function() {
                 $ionicNavBarDelegate.back();
             };
-
             // Create the login modal that we will use later
             $ionicModal.fromTemplateUrl('templates/form_modal/create_gasto.html', {
                 scope: $scope
             }).then(function(modal) {
                 $scope.modal = modal;
             });
-
             // Triggered in the Create Account to close it
             $scope.closeModal = function() {
                 $scope.modal.hide();
-                $scope.gastoData = {};//Clear form
+                $scope.gastoData = {}; //Clear form
             };
-
             // Open the Create Account modal
             $scope.openModal = function() {
                 $scope.modal.show();
             };
-
             $scope.deleteGasto = function($event, gastoNombre, gastoId) {
                 $event.preventDefault();
                 var confirmPopup = $ionicPopup.confirm({
@@ -267,7 +252,6 @@ angular.module('starter.controllers', [])
                     }
                 });
             };
-
             $scope.createGasto = function() {
                 console.log("createGasto", $scope.gastoData);
                 var response = AFV.createGasto($scope.gastoData, $stateParams.presupuestoId, $stateParams.categoriaId);
@@ -281,9 +265,5 @@ angular.module('starter.controllers', [])
                     });
                 }
             };
-
-
-
-
         });
 

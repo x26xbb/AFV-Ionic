@@ -1,21 +1,5 @@
 /* Empty. Add your own CSS if you like */
 
-.slider {
-    height: 100%;
-}
-.box{
-    height: 1000px;
-}
-.blue{
-    background-color: cyan;
-}
-.pink{
-    background-color: pink;
-}
-.yellow{
-    background-color: yellow;
-}
-
 .chart{
     width: 100% !important;
     max-width: 800px;
@@ -26,7 +10,9 @@
     font-size: 12em;
    
 }
-
+.slideHome{
+    padding-bottom: 45px;
+}
 .cardCenterText{
      text-align: center;
 }
