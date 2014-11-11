@@ -1,13 +1,45 @@
-<ion-view title="Presupuesto">
+<ion-view title="{{presupuesto.nombre}}">
 
     <ion-nav-buttons side="left">        
         <button class="button button-icon icon ion-arrow-left-c" ng-click="goBack()"></button>
     </ion-nav-buttons>
 
     <ion-content class="has-header">
-        <h1>Presupuesto</h1>
 
-        <div>{{presupuesto}}</div>
+        <div class="card">
+            <div class="item item-text-wrap">
+                {{presupuesto.proposito}}
+            </div>
+        </div>
+        <canvas id="presupuestoChart" class="chart"></canvas>  
+        <div  id="prespuestoCard" class="hide">
+            <div class="card cardCenterText">
+                <div class="item item-text-wrap">
+                    <i class="icon ion-settings big-icon"></i>
+                    <br/>
+                    Tu Presupuesto no está listo... Crea Categorias e ingresa montos!!!
+                </div>
+            </div>
+        </div>
+
+        <div>
+
+            <h2>Categorias</h2>
+
+            <ion-list>
+                <ion-item ng-repeat="categoria in presupuesto.categorias" href="#/app/presupuestos/{{presupuesto.presupuestoId}}/categorias/{{categoria.categoriaId}}">
+                    {{categoria.nombre}}
+                    <button class="button bar-assertive">
+                        <i class="icon ion-ios7-trash"></i>
+                    </button>
+                </ion-item>
+            </ion-list>
+
+            <button class="button button-block button-positive icon ion-android-add" ng-click="openModal()">
+
+            </button>
+
+        </div>
 
     </ion-content>
 </ion-view>

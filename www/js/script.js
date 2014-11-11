@@ -14,6 +14,32 @@ AFV.init = (function() {
 });
 
 
+AFV.createGasto = (function(data, prespuestoId, categoriaId) {
+    if (data) {
+        var url = AFV.afvrs + '/' + AFV.user + '/' + AFV.token + '/presupuestos/' + prespuestoId + '/categorias/' + categoriaId + '/gastos/add';
+        var response = AFV.sendDataSync(url, data, 'POST');
+        console.log('createGasto ', response);
+        if (response) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+});
+
+AFV.createCategoria = (function(data, prespuestoId) {
+    if (data) {
+        var url = AFV.afvrs + '/' + AFV.user + '/' + AFV.token + '/presupuestos/' + prespuestoId + '/categorias/add';
+        var response = AFV.sendDataSync(url, data, 'POST');
+        console.log('createCategoria ', response);
+        if (response) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+});
+
 AFV.createPresupuesto = (function(data) {
     if (data) {
         var url = AFV.afvrs + '/' + AFV.user + '/' + AFV.token + '/presupuestos/add';
@@ -75,6 +101,11 @@ AFV.getPresupuestos = (function() {
 AFV.getPresupuesto = (function(presupuestoId) {
     var url = AFV.afvrs + '/' + AFV.user + '/' + AFV.token + '/presupuestos/' + presupuestoId;
     return AFV.getData(url).presupuesto;
+});
+
+AFV.getCategoria = (function(presupuestoId, categoriaId) {
+    var url = AFV.afvrs + '/' + AFV.user + '/' + AFV.token + '/presupuestos/' + presupuestoId + '/categorias/' + categoriaId;
+    return AFV.getData(url).categoria;
 });
 
 AFV.sendData = (function(url, data) {

@@ -67,6 +67,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                             }
                         }
                     })
+                    
+                    .state('app.categoria', {
+                        url: "/presupuestos/:presupuestoId/categorias/:categoriaId",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "templates/categoria.html",
+                                controller: 'CategoriaCtrl'
+                            }
+                        }
+                    })
 
 
                     .state('app.login', {

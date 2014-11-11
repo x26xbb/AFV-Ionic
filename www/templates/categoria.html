@@ -1,0 +1,36 @@
+<ion-view title="{{categoria.nombre}}">
+
+    <ion-nav-buttons side="left">        
+        <button class="button button-icon icon ion-arrow-left-c" ng-click="goBack()"></button>
+    </ion-nav-buttons>
+
+    <ion-content class="has-header">
+
+        <div>
+
+            <h2>Gastos</h2>
+
+            <ion-list>
+                <ion-item
+                    class="item item-button-right"
+                    ng-repeat="gasto in categoria.gastos" 
+                    href="#/app/presupuestos/{{presupuesto.presupuestoId}}/categorias/{{categoria.categoriaId}}/gastos/{{gasto.gastoId}}">
+                    {{gasto.nombre}}
+
+                    <span class="item-note">
+                        {{gasto.monto}}
+                    </span>
+                    <button class="button bar-assertive">
+                        <i class="icon ion-ios7-trash"></i>
+                    </button>
+                </ion-item>
+            </ion-list>
+
+            <button class="button button-block button-positive icon ion-android-add" ng-click="openModal()">
+
+            </button>
+
+        </div>
+
+    </ion-content>
+</ion-view>

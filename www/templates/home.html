@@ -5,14 +5,23 @@
     <ion-content class="has-header">
         <ion-slide-box on-slide-changed="slideHasChanged($index)">
             <ion-slide>
-                <canvas id="myChart" width="400" height="400"></canvas>               
+                <canvas id="presupuestoChart" class="chart"></canvas>  
+                <div  id="prespuestoCard" class="hide">
+                    <div class="card cardCenterText">
+                        <div class="item item-text-wrap">
+                            <i class="icon ion-settings big-icon"></i>
+                            <br/>
+                            Tu Presupuesto no está listo... Crea Categorias e ingresa montos!!!
+                        </div>
+                    </div>
+                </div>
             </ion-slide>
             <ion-slide>
-                <div class="box yellow"><h1>{{userData}}</h1></div>
+                <div><h1>{{userData}}</h1></div>
             </ion-slide>
             <ion-slide>
-                <div class="box pink"><h1>PINK</h1></div>
+                <div><h1>PINK</h1></div>
             </ion-slide>
         </ion-slide-box>
-    </ion-content>
+    </ion-content>    
 </ion-view>
