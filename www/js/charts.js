@@ -17,7 +17,7 @@ AFV.sumaGastos = (function(presupuesto) {
         montoTotal = Math.round((montoTotal / ingreso) * 100);
         data.push({value: montoTotal, label: categoria.nombre, color: color.get(true), highlight: color.get(true)});
     }
-    dineroLibre = Math.round((dineroLibre / ingreso) * 100);
+    dineroLibre = Math.round((dineroLibre / ingreso) * 100);//???
     data.push({value: dineroLibre, label: "Dinero Libre", color: color.get(true), highlight: color.get(true)});
     return data;
 });
