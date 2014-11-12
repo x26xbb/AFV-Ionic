@@ -34,7 +34,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                         url: "/asesoramiento",
                         views: {
                             'menuContent': {
-                                templateUrl: "templates/asesoramiento.html"
+                                templateUrl: "templates/asesoramiento.html",
+                                controller: 'AsesoramientoCtrl'
                             }
                         }
                     })
@@ -42,7 +43,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                         url: "/cuentas",
                         views: {
                             'menuContent': {
-                                templateUrl: "templates/cuentas.html"
+                                templateUrl: "templates/cuentas.html",
+                                controller: 'ProfileCtrl'
                             }
                         }
                     })
@@ -50,7 +52,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                         url: "/profile",
                         views: {
                             'menuContent': {
-                                templateUrl: "templates/profile.html"
+                                templateUrl: "templates/profile.html",
+                                controller: 'ProfileCtrl'
                             }
                         }
                     })
@@ -58,7 +61,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                         url: "/settings",
                         views: {
                             'menuContent': {
-                                templateUrl: "templates/settings.html"
+                                templateUrl: "templates/settings.html",
+                                controller: 'ProfileCtrl'
                             }
                         }
                     })

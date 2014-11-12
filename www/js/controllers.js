@@ -51,8 +51,20 @@ angular.module('starter.controllers', [])
         })
 
         .controller('AppCtrl', function($scope) {
-            $scope.showProfileButton = function (){
+            $scope.showProfileButton = function() {
                 return AFV.showProfileButton;
+            };
+        })
+        .controller('ProfileCtrl', function($scope, $state) {
+            AFV.checkSession($state);
+            $scope.userData = AFV.getUser().user;
+        })
+
+        .controller('AsesoramientoCtrl', function($scope, $state) {
+            AFV.checkSession($state);
+            // Called each time the slide changes
+            $scope.slideChanged = function(index) {
+                $scope.slideIndex = index;
             };
         })
         .controller('PrestamosCtrl', function($scope) {
@@ -291,5 +303,5 @@ angular.module('starter.controllers', [])
                 }
             };
         });
-       
+
 
