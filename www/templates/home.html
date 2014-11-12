@@ -4,26 +4,12 @@
     </ion-nav-buttons>
     <ion-content class="has-header">
         <ion-slide-box on-slide-changed="slideHasChanged($index)">
-            <!--            <ion-slide>
-                            <div id="chartsDiv">
-                                <canvas id="presupuestoChart" class="chart"></canvas>  
-                                <canvas id="presupuestoChartBarras" class="chart"></canvas>  
-                            </div>
-            
-                            <div  id="prespuestoCard" class="hide">
-                                <div class="card cardCenterText">
-                                    <div class="item item-text-wrap">
-                                        <i class="icon ion-settings big-icon"></i>
-                                        <br/>
-                                        Tu Presupuesto no está listo... Crea Categorias e ingresa montos!!!
-                                    </div>
-                                </div>
-                            </div>
-                        </ion-slide>-->
             <ion-slide
                 ng-repeat="presupuesto in userData.user.presupuestos" class="slideHome">
                 <div ng-attr-id="{{ 'chartsDiv_' + presupuesto.presupuestoId}}">
                     <div class="item item-text-wrap">
+                        {{presupuesto.nombre}}
+                        <br/>
                         {{presupuesto.proposito}}
                         <br/>
                         Ingreso: {{presupuesto.ingreso}}
@@ -62,7 +48,60 @@
                 </div>
             </ion-slide>
             <ion-slide>
-                <div><h1>PINK</h1></div>
+                <div class="list">
+                    <div class="item item-divider cardCenterText">
+                        <i class="icon ion-ios7-people"></i>&nbsp;AFV Team
+                    </div>
+                    <div class="item cardCenterText">
+                        <canvas id="usCanvas"  class="char"></canvas>  
+                    </div>
+
+
+                    <!-- Kevin -->
+                    <div class="item item-divider cardCenterText Kevin list-item-us">
+                        <i class="icon ion-game-controller-b"></i>&nbsp;Kevin
+                    </div>
+                    <div class="item cardCenterText Kevin list-item-us">
+                        <b>Kevin Villalobos A.</b><br/>
+                        correo: kevin.villalobos.a@gmail.com<br/>
+                        github: x26xbb
+                    </div>
+
+
+                    <!-- Mariana -->
+                    <div class="item item-divider cardCenterText Mariana list-item-us">
+                        <i class="icon ion-icecream"></i>&nbsp;Mariana
+                    </div>
+                    <div class="item cardCenterText Mariana list-item-us">
+                        <b>Mariana Córdoba V.</b><br/>
+                        correo: marianna2992@gmail.com<br/>
+                        github: marianna2992
+                    </div>
+
+                    <!-- Fabio -->
+                    <div class="item item-divider cardCenterText Fabio list-item-us">
+                        <i class="icon ion-ios7-football-outline"></i>&nbsp;Fabio
+                    </div>
+                    <div class="item cardCenterText Fabio hide list-item-us">
+                        <b>Fabio Arroyo V.</b><br/>
+                        correo: avfabio91@gmail.com<br/>
+                        github: fabio161191
+                    </div>
+
+
+                    <!-- Andres -->
+                    <div class="item item-divider cardCenterText Andres list-item-us">
+                        <i class="icon ion-ios7-musical-notes"></i>&nbsp;Andrés
+                    </div>
+                    <div class="item cardCenterText Andres list-item-us">
+                        <b>Andrés Mora C.</b><br/>
+                        correo: andresmc11@gmail.com<br/>
+                        github: amc11
+                    </div>
+                </div>
+                <div class="item item-image">
+                    <img src="img/AFV7.PNG">
+                </div>
             </ion-slide>
         </ion-slide-box>
     </ion-content>   

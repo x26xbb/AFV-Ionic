@@ -1,0 +1,53 @@
+<ion-view title="Prestamos">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header">
+        <h3 class="titulo">Calcule su cuota mensual</h3>
+        <legend class="formulario">Datos del Préstamo</egend>
+            <form id="DatosCal">
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input">
+                            <span class="input-label">Monto: </span>
+                            <input type="number" onkeypress="return AFV.justNumbers(event);" ng-model="prestamoData.nprice">
+                        </label>
+                    </div>
+
+                    <div class="col">
+                        <label class="item item-input">
+                            <span class="input-label">Depósito: </span>
+                            <input type="number" onkeypress="return AFV.justNumbers(event);" ng-model="prestamoData.payment">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label class="item item-input">
+                            <span class="input-label">Plazo: </span>
+                            <input type="number" onkeypress="return AFV.justNumbers(event);" ng-model="prestamoData.plazo">
+                        </label>
+                    </div>
+
+                    <div class="col">
+                        <label class="item item-input">
+                            <span class="input-label">Interés: </span>
+                            <input type="number" onkeypress="return AFV.justNumbers(event);" ng-model="prestamoData.rate">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <button class="button col-50 button-positive" ng-click="calcpayments()">Calcular</button>
+                    <button class="button col-50 button-calm" ng-click="buttonReset()">Borrar</button>
+                </div>
+
+            </form>
+            <div id="resultado"  class="card">
+                <b>Su pago mensual es de:</b><br/>
+                <b id="monthlypayment" class="monthlypayment"></b>
+            </div>
+    </ion-content>
+</ion-view>
+

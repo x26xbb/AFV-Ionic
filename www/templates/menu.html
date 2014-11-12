@@ -2,34 +2,34 @@
     <ion-pane ion-side-menu-content>
         <ion-nav-bar class="bar-positive nav-title-slide-ios7">
             <ion-nav-buttons side="right">        
-                <button class="button icon ion-ios7-person"></button>
+                <a ng-show="showProfileButton()" menu-close class="button icon ion-ios7-person" href="#/app/profile"></a>
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
     </ion-pane>
     <ion-side-menu side="left">
         <header class="bar bar-header bar-positive">
-            <button class="button icon ion-gear-a"></button>
+            <a class="button icon ion-gear-a" menu-close Fhref="#/app/settings"></a>
         </header>
         <ion-content class="has-header">
             <ion-list>
                 <ion-item nav-clear menu-close href="#/app/home">
-                    Home
+                    <i class="icon ion-home"></i>&nbsp;Home
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/presupuestos">
-                    Presupuesto
+                    <i class="icon ion-cash"></i>&nbsp;Presupuesto
                 </ion-item>                
-                <ion-item nav-clear menu-close href="#/app/playlists">
-                    Cuentas
+                <ion-item nav-clear menu-close href="#/app/cuentas">
+                    <i class="icon ion-card"></i>&nbsp;Cuentas
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/playlists">
-                    Prestamos
+                <ion-item nav-clear menu-close  href="#/app/prestamos">
+                    <i class="icon ion-ios7-calculator"></i>&nbsp;Prestamos
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/playlists">
-                    *Asesoramiento
+                <ion-item nav-clear menu-close href="#/app/asesoramiento">
+                    <i class="icon ion-chatbubble-working"></i>&nbsp;Asesoramiento
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/">
-                    Log out
+                    Log out&nbsp;<i class="icon ion-log-out"></i>
                 </ion-item>
             </ion-list>
         </ion-content>

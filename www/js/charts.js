@@ -100,11 +100,7 @@ AFV.showPresupuesto = (function(presupuesto) {
     var canvas = $("#presupuestoChart_" + presupuesto.presupuestoId).get(0);
     var ctx = canvas.getContext("2d");
     var presupuestoChart = new Chart(ctx).Pie(AFV.sumaGastos(presupuesto), AFV.chartOptions);
-    canvas.onclick = function(evt) {
-        var activePoints = presupuestoChart.getSegmentsAtEvent(evt);
-        console.log("Chart Click", activePoints);
-        // => activePoints is an array of segments on the canvas that are at the same position as the click event.
-    };
+
 });
 
 AFV.isPresupuestoReady = (function(presupuesto) {
@@ -164,3 +160,69 @@ AFV.charOptionsBar = {
 
 };
 
+AFV.showUs = (function(presupuesto) {
+    var canvas = $("#usCanvas").get(0);
+    var ctx = canvas.getContext("2d");
+    $(".list-item-us").slideDown().hide();;
+    var presupuestoChart = new Chart(ctx).Pie(AFV.usData, AFV.usOptions);
+    canvas.onclick = function(evt) {
+        var activePoints = presupuestoChart.getSegmentsAtEvent(evt);
+        var you = activePoints[0].label;
+        if (you) {
+            console.log("Chart US Click", you);
+            $(".list-item-us").slideDown().hide();
+            $("." + you).show();
+        }
+
+        // => activePoints is an array of segments on the canvas that are at the same position as the click event.
+    };
+});
+
+AFV.usData = [
+    {
+        value: 25,
+        color: "#0dc4e0",
+        highlight: "#2aa198",
+        label: "Kevin"
+    },
+    {
+        value: 25,
+        color: "#7fffd4",
+        highlight: "#a700b3",
+        label: "Mariana"
+    },
+    {
+        value: 25,
+        color: "#00dd2f",
+        highlight: "#f47835",
+        label: "Fabio"
+    },
+    {
+        value: 25,
+        color: "#9b8c75",
+        highlight: "#2f2f2f",
+        label: "Andres"
+    }
+];
+
+AFV.usOptions = {
+    //Boolean - Whether we should show a stroke on each segment
+    segmentShowStroke: true,
+    //String - The colour of each segment stroke
+    segmentStrokeColor: "#fff",
+    //Number - The width of each segment stroke
+    segmentStrokeWidth: 2,
+    //Number - The percentage of the chart that we cut out of the middle
+    percentageInnerCutout: 50, // This is 0 for Pie charts
+    //Number - Amount of animation steps
+    animationSteps: 100,
+    //String - Animation easing effect
+    animationEasing: "easeOutBounce",
+    //Boolean - Whether we animate the rotation of the Doughnut
+    animateRotate: true,
+    //Boolean - Whether we animate scaling the Doughnut from the centre
+    animateScale: false,
+    //String - A legend template
+    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+
+};

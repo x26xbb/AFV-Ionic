@@ -2,12 +2,14 @@ angular.module('starter.controllers', [])
         .controller('AppCtrlLogin', function($scope, $ionicSideMenuDelegate, $state, $ionicModal, $ionicPopup) {
             $scope.loginData = {};
             $scope.accountData = {};
+            AFV.showProfileButton = false;
             //AFV.preLogin();
             $ionicSideMenuDelegate.canDragContent(false);
             $scope.doLogin = function() {
                 if (AFV.login($scope.loginData)) {
                     $state.go("app.home");
                     $ionicSideMenuDelegate.canDragContent(true);
+                    AFV.showProfileButton = true;
                 } else {
                     $ionicPopup.alert({
                         title: 'Error!',
@@ -49,7 +51,29 @@ angular.module('starter.controllers', [])
         })
 
         .controller('AppCtrl', function($scope) {
+            $scope.showProfileButton = function (){
+                return AFV.showProfileButton;
+            };
+        })
+        .controller('PrestamosCtrl', function($scope) {
+            $scope.prestamoData = {};
 
+            $scope.calcpayments = function() {
+                console.log("calcpayments");
+                var nprice = $scope.prestamoData.nprice;
+                var interest = $scope.prestamoData.rate;
+                var dpayment = $scope.prestamoData.payment;
+                var plazo = $scope.prestamoData.plazo;
+
+                var result = (((nprice * (interest / 100)) + nprice) - dpayment) / plazo;
+
+                $("#monthlypayment").html("¢" + result);
+                $("#resultado").show();
+            };
+            $scope.buttonReset = function() {
+                $scope.prestamoData = {};
+                $("#resultado").hide();
+            };
         })
         .controller('HomeCtrl', function($scope, $state) {
             AFV.checkSession($state);
@@ -59,6 +83,7 @@ angular.module('starter.controllers', [])
                 $scope.$on('$viewContentLoaded', function() {
                     setTimeout(function() {
                         AFV.chartInitHome();
+                        AFV.showUs();
                     }, AFV.timeOut);
                 });
             });
@@ -266,4 +291,5 @@ angular.module('starter.controllers', [])
                 }
             };
         });
+       
 

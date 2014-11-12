@@ -8,7 +8,7 @@ AFV.server = 'https://afv-close-beta.herokuapp.com/';
 AFV.srrs = AFV.server + 'sharedService/ssrs';
 AFV.afvrs = AFV.server + 'afvServices/afvrs';
 
-
+AFV.showProfileButton = false;
 AFV.tempPresupuestos = {};
 
 AFV.init = (function() {
@@ -216,5 +216,12 @@ AFV.getData = (function(url) {
     });
 
     return response;
+});
+
+AFV.justNumbers = (function() {
+    var keynum = window.event ? window.event.keyCode : e.which;
+    if ((keynum === 8) || (keynum === 46))
+        return true;
+    return /\d/.test(String.fromCharCode(keynum));
 });
 

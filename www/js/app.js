@@ -30,15 +30,47 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                         controller: 'AppCtrl'
                     })
 
-                    .state('app.search', {
-                        url: "/search",
+                    .state('app.asesoramiento', {
+                        url: "/asesoramiento",
                         views: {
                             'menuContent': {
-                                templateUrl: "templates/search.html"
+                                templateUrl: "templates/asesoramiento.html"
                             }
                         }
                     })
-
+                    .state('app.cuentas', {
+                        url: "/cuentas",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "templates/cuentas.html"
+                            }
+                        }
+                    })
+                    .state('app.profile', {
+                        url: "/profile",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "templates/profile.html"
+                            }
+                        }
+                    })
+                    .state('app.settings', {
+                        url: "/settings",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "templates/settings.html"
+                            }
+                        }
+                    })
+                    .state('app.prestamos', {
+                        url: "/prestamos",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "templates/prestamos.html",
+                                controller: 'PrestamosCtrl'
+                            }
+                        }
+                    })
                     .state('app.home', {
                         url: "/home",
                         views: {
@@ -67,7 +99,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                             }
                         }
                     })
-                    
+
                     .state('app.categoria', {
                         url: "/presupuestos/:presupuestoId/categorias/:categoriaId",
                         views: {
