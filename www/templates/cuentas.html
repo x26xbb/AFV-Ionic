@@ -3,7 +3,69 @@
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
     <ion-content class="has-header">
-        <h1>Cuentas</h1>
+        <div class="list">
+
+            <label class="item item-input item-select">
+                <div class="input-label">Seleccione el Banco</div>
+                <select>
+                    <option selected>Banco Nacional</option>
+                    <option>Banco de Costa Rica</option>
+                    <option>Banco Popular</option>
+                    <option>Banco LAFISE</option>
+                    <option>Banco Promerica</option>
+                    <option>Otro...</option>
+                </select>
+            </label>
+
+        </div>
+
+        <h4>Seleccione el tipo de cuenta </h4>
+        <div class="row">
+            <div class="col">
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input name="tipoCuenta" type="radio">
+                    </label> Ahorros
+                </li>
+            </div>
+            <div class="col">
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input name="tipoCuenta"  type="radio">
+                    </label> Corriente
+                </li>
+            </div>
+        </div>
+
+        <hr size="10" />
+        <div> 
+            <h4>Número de Cuenta: </h4>
+            <label class="item item-input">
+                <input type="text" >
+            </label>
+        </div>
+
+        <h3>Seleccione la moneda </h3>
+        <div class="row">
+            <div class="col">
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input name="moneda" type="radio" >
+                    </label> Colones
+                </li>
+            </div>
+            <div class="col">
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input name="moneda" type="radio">
+                    </label> Dolares
+                </li>
+            </div>
+        </div>
+
+        <div>
+            <button class="button button-block button-positive"> Agregar</button>
+        </div>
     </ion-content>
 </ion-view>
 
